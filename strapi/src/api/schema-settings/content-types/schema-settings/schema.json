@@ -1,0 +1,131 @@
+{
+  "kind": "singleType",
+  "collectionName": "schema_settings",
+  "info": {
+    "singularName": "schema-settings",
+    "pluralName": "schema-settings-list",
+    "displayName": "Schema Settings",
+    "description": "Organization / LocalBusiness data for JSON-LD Schema.org output"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "schema_type": {
+      "type": "enumeration",
+      "enum": [
+        "Organization",
+        "LocalBusiness",
+        "Corporation",
+        "HealthAndBeautyBusiness",
+        "FoodEstablishment",
+        "RealEstateAgent",
+        "EducationalOrganization",
+        "LegalService",
+        "FinancialService"
+      ],
+      "default": "Organization"
+    },
+    "business_name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "website_url": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "city": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "country": {
+      "type": "string"
+    },
+    "postal_code": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "decimal"
+    },
+    "longitude": {
+      "type": "decimal"
+    },
+    "opening_hours": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "description": "e.g. Mo-Fr 09:00-18:00"
+    },
+    "price_range": {
+      "type": "string",
+      "description": "e.g. $$ or 50-200 USD"
+    },
+    "social_profiles": {
+      "type": "json",
+      "description": "Array of social profile URLs"
+    },
+    "founded_year": {
+      "type": "integer"
+    },
+    "number_of_employees": {
+      "type": "enumeration",
+      "enum": [
+        "n_1_10",
+        "n_11_50",
+        "n_51_200",
+        "n_201_1000",
+        "n_1001_plus"
+      ]
+    }
+  }
+}

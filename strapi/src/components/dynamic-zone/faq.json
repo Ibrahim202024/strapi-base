@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_dynamic_zone_faqs",
+  "info": {
+    "displayName": "FAQ",
+    "icon": "question",
+    "description": "Inline FAQ items — no separate content type needed"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "sub_heading": {
+      "type": "string"
+    },
+    "faqs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.faq-item"
+    }
+  }
+}

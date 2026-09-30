@@ -1,0 +1,53 @@
+{
+  "name": "neop-website-starter",
+  "version": "1.0.0",
+  "description": "Production-ready bilingual (AR+EN) website starter: Strapi 5 + Nuxt 4 + MySQL",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "setup": "node --import tsx ./scripts/setup.mts",
+    "dev": "node --import tsx ./scripts/dev.mts",
+    "dev:nuxt": "node --import tsx ./scripts/dev.mts",
+    "use": "node --import tsx ./scripts/use.mts",
+    "check:env": "node --import tsx ./scripts/check-env.mts",
+    "strapi": "yarn dev --prefix ../strapi/",
+    "seed": "yarn --cwd strapi strapi import -f ./data/export_20250116105447.tar.gz --force --exclude files --only-content-types api::page.page,api::global.global,api::article.article,api::blog-page.blog-page,api::category.category,api::redirection.redirection,api::testimonial.testimonial",
+    "export": "yarn --cwd strapi strapi export --no-encrypt -f ./data/export_20250116105447",
+    "repo:upstream": "git fetch upstream && git merge upstream/main",
+    "check:format": "prettier . --check --cache",
+    "fix:format": "prettier . --write --cache",
+    "fix": "yarn fix:format",
+    "lint-staged": "lint-staged",
+    "test": "yarn --cwd nuxt test",
+    "build:strapi": "yarn --cwd strapi build",
+    "build:nuxt": "yarn --cwd nuxt build",
+    "start:strapi": "yarn --cwd strapi start",
+    "start:nuxt": "node nuxt/.output/server/index.mjs",
+    "docker:dev": "docker compose up",
+    "docker:mysql": "docker compose up -d mysql",
+    "docker:build": "docker compose build"
+  },
+  "dependencies": {
+    "@types/node": "^22.5.2",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.0.0",
+    "wait-on": "^8.0.1"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@vue/compiler-sfc": "^3.5.42",
+    "dotenv": "^17.2.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.23.13",
+    "uuid": "^13.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,md,yml,yaml}": [
+      "yarn fix:format"
+    ]
+  },
+  "packageManager": "yarn@4.5.0"
+}

@@ -1,0 +1,81 @@
+# Neop Website Starter - Local Dev Stack
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: neop_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: neop_strapi
+      MYSQL_USER: strapi
+      MYSQL_PASSWORD: strapi_password
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    command:
+      - '--character-set-server=utf8mb4'
+      - '--collation-server=utf8mb4_unicode_ci'
+      - '--default-time-zone=+00:00'
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'strapi', '-pstrapi_password']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  strapi:
+    build:
+      context: ./strapi
+      dockerfile: Dockerfile
+      target: development
+    container_name: neop_strapi
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DATABASE_CLIENT: mysql2
+      DATABASE_HOST: mysql
+      DATABASE_PORT: 3306
+      DATABASE_NAME: neop_strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapi_password
+      HOST: 0.0.0.0
+      PORT: 1337
+      CLIENT_URL: http://localhost:3001
+      NODE_ENV: development
+    env_file:
+      - ./strapi/.env
+    ports:
+      - '1337:1337'
+    volumes:
+      - ./strapi:/app
+      - /app/node_modules
+      - strapi_uploads:/app/public/uploads
+
+  nuxt:
+    build:
+      context: ./nuxt
+      dockerfile: Dockerfile
+      target: development
+    container_name: neop_nuxt
+    restart: unless-stopped
+    depends_on:
+      - strapi
+    environment:
+      STRAPI_URL: http://strapi:1337
+      PORT: 3001
+      NODE_ENV: development
+    env_file:
+      - ./nuxt/.env
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./nuxt:/app
+      - /app/node_modules
+
+volumes:
+  mysql_data:
+  strapi_uploads:

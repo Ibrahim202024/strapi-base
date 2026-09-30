@@ -1,0 +1,32 @@
+module.exports = {
+  apps: [
+    {
+      name: 'neop-strapi',
+      cwd: './strapi',
+      script: 'yarn',
+      args: 'start',
+      env: { NODE_ENV: 'production', PORT: 1337 },
+      max_memory_restart: '1G',
+      error_file: '../logs/strapi-error.log',
+      out_file: '../logs/strapi-out.log',
+      time: true,
+      watch: false,
+      autorestart: true,
+      restart_delay: 3000,
+    },
+    {
+      name: 'neop-nuxt',
+      cwd: './nuxt',
+      script: 'node',
+      args: '.output/server/index.mjs',
+      env: { NODE_ENV: 'production', PORT: 3001 },
+      max_memory_restart: '512M',
+      error_file: '../logs/nuxt-error.log',
+      out_file: '../logs/nuxt-out.log',
+      time: true,
+      watch: false,
+      autorestart: true,
+      restart_delay: 2000,
+    },
+  ],
+};

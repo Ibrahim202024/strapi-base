@@ -1,0 +1,56 @@
+{
+  "collectionName": "components_shared_form_fields",
+  "info": {
+    "displayName": "Form Field",
+    "icon": "filter",
+    "description": "A single input field in a form"
+  },
+  "options": {},
+  "attributes": {
+    "field_type": {
+      "type": "enumeration",
+      "enum": [
+        "text",
+        "email",
+        "phone",
+        "number",
+        "select",
+        "radio",
+        "checkbox",
+        "textarea",
+        "file"
+      ],
+      "required": true,
+      "default": "text"
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "description": "HTML name attribute � used as the key in submissions"
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "options": {
+      "type": "text",
+      "description": "For select/radio/checkbox: comma-separated list of values"
+    },
+    "validation_pattern": {
+      "type": "string",
+      "description": "Optional regex pattern for validation"
+    },
+    "half_width": {
+      "type": "boolean",
+      "default": false,
+      "description": "Render at 50% width alongside another half-width field"
+    }
+  }
+}

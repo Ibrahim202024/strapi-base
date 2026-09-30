@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /nuxt
+    schedule:
+      interval: weekly
+    groups:
+      nuxt-deps:
+        patterns: ['nuxt', '@nuxt/*']
+  - package-ecosystem: npm
+    directory: /strapi
+    schedule:
+      interval: weekly
+    groups:
+      strapi-deps:
+        patterns: ['@strapi/*', 'strapi']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

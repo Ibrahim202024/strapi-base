@@ -1,0 +1,52 @@
+{
+  "kind": "singleType",
+  "collectionName": "tracking_settings",
+  "info": {
+    "singularName": "tracking-settings",
+    "pluralName": "tracking-settings-list",
+    "displayName": "Tracking Settings",
+    "description": "Third-party analytics and marketing pixel IDs"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "gtm_id": {
+      "type": "string",
+      "description": "Google Tag Manager ID (GTM-XXXXXXX)"
+    },
+    "ga4_id": {
+      "type": "string",
+      "description": "Google Analytics 4 Measurement ID (G-XXXXXXXX)"
+    },
+    "meta_pixel_id": {
+      "type": "string",
+      "description": "Meta (Facebook) Pixel ID"
+    },
+    "snapchat_pixel_id": {
+      "type": "string",
+      "description": "Snapchat Pixel ID"
+    },
+    "tiktok_pixel_id": {
+      "type": "string",
+      "description": "TikTok Pixel ID"
+    },
+    "linkedin_insight_id": {
+      "type": "string",
+      "description": "LinkedIn Insight Tag Partner ID"
+    },
+    "google_ads_id": {
+      "type": "string",
+      "description": "Google Ads Conversion ID (AW-XXXXXXXXX)"
+    },
+    "google_search_console_verification": {
+      "type": "string",
+      "description": "Google Search Console meta tag verification code"
+    },
+    "bing_verification": {
+      "type": "string",
+      "description": "Bing Webmaster Tools verification meta tag content"
+    }
+  }
+}

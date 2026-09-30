@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "redirections",
+  "info": {
+    "singularName": "redirection",
+    "pluralName": "redirections",
+    "displayName": "Redirection"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "source": {
+      "type": "string"
+    },
+    "destination": {
+      "type": "string"
+    },
+    "status_code": {
+      "type": "enumeration",
+      "enum": [
+        "code_301",
+        "code_302"
+      ],
+      "default": "code_301",
+      "required": true,
+      "description": "301 = Permanent redirect, 302 = Temporary redirect"
+    },
+    "from": {
+      "type": "string"
+    },
+    "to": {
+      "type": "string"
+    }
+  }
+}

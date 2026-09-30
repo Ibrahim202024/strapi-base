@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "form_submissions",
+  "info": {
+    "singularName": "form-submission",
+    "pluralName": "form-submissions",
+    "displayName": "Form Submissions",
+    "description": "Stores submitted form data"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "form": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::form.form",
+      "inversedBy": "submissions"
+    },
+    "data": {
+      "type": "json",
+      "required": true,
+      "description": "Submitted field values as key-value pairs"
+    },
+    "source_url": {
+      "type": "string",
+      "description": "Page URL where the form was submitted"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "Submitter IP (for spam detection)"
+    },
+    "user_agent": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "new",
+        "read",
+        "replied",
+        "spam"
+      ],
+      "default": "new"
+    },
+    "notes": {
+      "type": "text",
+      "description": "Internal notes (not shown to submitter)"
+    }
+  }
+}

@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-nuxt:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nuxt
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          cache-dependency-path: nuxt/yarn.lock
+      - run: yarn install --immutable
+      - run: yarn test --reporter=verbose
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: yarn install --immutable
+      - run: yarn check:format
+
+  build-strapi:
+    name: Build Strapi
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: strapi
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          cache-dependency-path: strapi/yarn.lock
+      - run: yarn install --immutable
+      - name: Build admin panel
+        env:
+          APP_KEYS: ci-key-1,ci-key-2
+          API_TOKEN_SALT: ci-salt
+          ADMIN_JWT_SECRET: ci-jwt-secret
+          TRANSFER_TOKEN_SALT: ci-transfer-salt
+          JWT_SECRET: ci-jwt
+          DATABASE_CLIENT: sqlite
+          DATABASE_FILENAME: .tmp/ci.db
+        run: yarn build
+
+  build-nuxt:
+    name: Build Nuxt
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nuxt
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          cache-dependency-path: nuxt/yarn.lock
+      - run: yarn install --immutable
+      - name: Build Nuxt app
+        env:
+          STRAPI_URL: http://localhost:1337
+          STRAPI_API_TOKEN: ci-placeholder
+          PREVIEW_SECRET: ci-preview-secret
+          SESSION_SECRET: ci-session-secret-at-least-32-chars
+          WEBSITE_URL: https://example.com
+        run: yarn build
