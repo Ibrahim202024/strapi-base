@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GitLab Pipeline Trigger
-        uses: digital-blueprint/gitlab-pipeline-trigger-action@v1.2.0
+        uses: digital-blueprint/gitlab-pipeline-trigger-action@v1.4.4
         with:
           trigger_token: ${{ secrets.GITLAB_TRIGGER_TOKEN }}
           access_token: ${{ secrets.GITLAB_API_TOKEN }}
